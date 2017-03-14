@@ -523,7 +523,7 @@ again:
 	/* Print error and loop around to do it again */
 	if (state == 1)
 		state = 0;
-	send(fd, "\r\nLogin incorrect. Try again.\r\n", 30, flags);
+	send(fd, "\r\nLogin incorrect. Try again.", 30, flags);
 	if (tries++ < 5) {
 		sleep(2);
 		hello = "\r\nLogin: ";
