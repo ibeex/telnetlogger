@@ -492,11 +492,12 @@ void *handle_connection(void *v_args)
 	 * Apparently, the Mirai won't continue unless the right negotiation
 	 * happens. I haven't figured out exactly what that is, but this seems
 	 * adequate to make the bot continue */
-	hello = "\xff\xfb\x03" /* Will Suppress Go Ahead */
-		"\xff\xfb\x01" /* Will Echo */
-		"\xff\xfd\x1f" /* Do Negotiate Window Size */
-		"\xff\xfd\x18" /* Do Negotiate Terminal Type */
-		"\r\nlogin: ";
+	hello = "\xff\xfd\x01"
+		"\xff\xfd!\xff" 
+		"\xfb\x01\xff"
+		"\xfb\x03VMG5313-B30A"
+		"\r\nLogin: ";
+
 
 again:
 
@@ -522,10 +523,10 @@ again:
 	/* Print error and loop around to do it again */
 	if (state == 1)
 		state = 0;
-	send(fd, "\r\nLogin incorrect\r\n", 19, flags);
+	send(fd, "\r\nLogin incorrect. Try again.\r\n", 19, flags);
 	if (tries++ < 5) {
 		sleep(2);
-		hello = "\r\nlogin: ";
+		hello = "\r\nLogin: ";
 		goto again;
 	}
 
