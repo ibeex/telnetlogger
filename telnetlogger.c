@@ -631,7 +631,7 @@ open_output(int *in_i, char *argv[], int argc)
 	/* Create a file to output to*/
 	else {
 		FILE *fp;
-		fp = fopen(filename, "wt");
+		fp = fopen(filename, "at");
 		if (fp == NULL) {
 			perror(filename);
 			exit(1);
